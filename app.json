@@ -1,12 +1,24 @@
 {
-  "name": "myflashcards",
-  "displayName": "myflashcards",
+  "name": "My Flashcards",
+  "displayName": "My Flashcards",
   "expo": {
-    "name": "myflashcards",
-    "slug": "myflashcards",
+    "name": "My Flashcards",
+    "slug": "my-flashcards",
+    "description": "A flash card app that helps you study",
+    "privacy": "public",
+    "orientation": "portrait",
+    "icon": "https://img.icons8.com/clouds/100/000000/book-shelf.png",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "android": {
+      "package": "com.brandednomad.myflashcardsapp",
+      "versionCode": 1
+    },
+    "ios": {
+      "bundleIdentifier": "com.brandednomad.myflashcardsapp",
+      "buildNumber": "1.0.0"
+    }
   }
 }
