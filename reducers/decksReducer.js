@@ -13,6 +13,13 @@ function decksReducer(state={},action){
                 ...state,
                 [action.deck.title]:action.deck
             }
+        case REMOVE_DECK:
+
+            delete state[action.title]
+
+            return {
+                ...state
+            }
         default:
             return state
     }

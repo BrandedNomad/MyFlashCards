@@ -1,13 +1,30 @@
-import React from 'react';
-import {View,Text,FlatList, StyleSheet} from 'react-native'
+import React,{useEffect,useState} from 'react';
+import {View,Text,FlatList, StyleSheet,ActivityIndicator} from 'react-native'
+import {connect} from 'react-redux'
+
 
 import {decks} from "../utils/_DATA";
 import DeckListItem from "./DeckListItem"
+import {handleInitialData} from "../actions/decksAction";
+import {AppLoading} from "expo";
+import {PRIMARY_PURPLE, SECONDARY_PINK} from "../utils/colors";
 
 
 function Home(props){
 
-    if(Object.keys(decks).length === 0 || Object.keys(decks) === undefined){
+    const [ready,setReady] = useState(false)
+
+    useEffect(()=>{
+        setReady(false)
+        props.dispatch(handleInitialData()).then(setReady(true))
+    },[])
+
+    const decks = props.decks
+    const cardsKeysList =  Object.keys(decks)
+
+    console.log(cardsKeysList)
+
+    if(cardsKeysList.length === 0){
         return (
             <View style={styles.noDeck}>
                 <Text>You Dont have any decks yet!</Text>
@@ -15,11 +32,21 @@ function Home(props){
         )
     }
 
-    const decksKeys = Object.keys(decks)
+    if(ready === false){
+        return (
+            <View style={styles.loading}>
+                <ActivityIndicator size="large"  color={PRIMARY_PURPLE}/>
+            </View>
+        )
+    }
+
+    const decksKeys = Object.keys(props.decks)
     const decksList = []
     decksKeys.forEach((item)=>{
-        decksList.push(decks[item])
+        decksList.push(props.decks[item])
     })
+
+
 
 
 
@@ -54,7 +81,18 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         justifyContent:'center',
         alignItems:'center'
+    },
+    loading:{
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center'
     }
 })
 
-export default Home
+function mapStateToProps(state){
+    return{
+        decks:state
+    }
+}
+
+export default connect(mapStateToProps)(Home)

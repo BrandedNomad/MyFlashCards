@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 import StyledButton from "./StyledButton";
 import {GRAY} from "../utils/colors";
-import {addDeck} from "../actions/decksAction";
+import {handleAddDeck} from "../actions/decksAction";
 
 
 function NewDeck({route,navigation,dispatch}){
@@ -29,8 +29,10 @@ function NewDeck({route,navigation,dispatch}){
                     btnText={"Create Deck"}
                     btnType={"primary"}
                     onPress={()=>{
-                        dispatch(addDeck({title:text,cards:[]}))
-                        navigation.navigate('Deck',{deck:{title:text,cards:[]}})
+                        const title = text
+                        dispatch(handleAddDeck({title:title,cards:[]}))
+                        navigation.navigate('Deck',{deck:{title:title,cards:[]}})
+                        setText('')
                     }}
                 />
             </View>

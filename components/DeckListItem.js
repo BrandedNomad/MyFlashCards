@@ -5,7 +5,7 @@ import {DARK_BLUE, DARK_PINK, DARK_PURPLE, LIGHT_BLUE, LIGHT_PURPLE, PRIMARY_PUR
 function DeckListItem({deck,navigation}){
 
     const title = deck.title;
-    const number = deck.cards.length + ""
+    const number = deck.cards.length !== undefined ? deck.cards.length + "" : "0"
 
 
     return (

@@ -1,9 +1,12 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {connect} from 'react-redux'
+
 import StyledButton from "./StyledButton";
 import {BLACK, GRAY} from "../utils/colors";
+import {handleRemoveDeck} from "../actions/decksAction";
 
-function Deck({route}){
+function Deck({route,dispatch,navigation}){
     const deck = route.params.deck
     const title = deck.title;
     const number = deck.cards.length + "";
@@ -16,7 +19,10 @@ function Deck({route}){
             <View style={styles.options}>
                 <StyledButton btnType={'secondary'} btnText={'Add Card'}/>
                 <StyledButton btnType={'primary'} btnText={'Start Quiz'}/>
-                <StyledButton btnType={'tertiary'} btnText={'Delete Deck'}/>
+                <StyledButton btnType={'tertiary'} btnText={'Delete Deck'} onPress={()=>{
+                    dispatch(handleRemoveDeck(title))
+                    navigation.navigate('Home')
+                }}/>
             </View>
         </View>
     )
@@ -52,4 +58,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default Deck;
+export default connect()(Deck);
