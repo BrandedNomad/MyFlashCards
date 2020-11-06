@@ -5,12 +5,18 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {NavigationContainer} from "@react-navigation/native";
 import {FontAwesome,MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons';
 import Constants from 'expo-constants'
+import {createStore,applyMiddleware} from "redux";
+import {Provider} from 'react-redux';
+import decksReducer from "./reducers/decksReducer";
 
 import Home from './components/Home'
 import NewDeck from "./components/NewDeck";
 import Deck from './components/Deck';
 import {PRIMARY_BLUE, WHITE, GRAY, SECONDARY_PINK, DARK_BLUE} from "./utils/colors";
+import logger from "./middleware/logger";
 
+
+const store = createStore(decksReducer,applyMiddleware(logger));
 
 function MyStatusBar({backgroundColor,...props}){
     return (
@@ -98,12 +104,15 @@ const mainNavigator=()=>{
 
 export default function App() {
   return (
-      <View style={{flex:1}}>
-          <MyStatusBar backgroundColor={DARK_BLUE} barStyle='light-content'/>
-          <NavigationContainer>
-              {mainNavigator()}
-          </NavigationContainer>
-      </View>
+      <Provider store={store}>
+          <View style={{flex:1}}>
+              <MyStatusBar backgroundColor={DARK_BLUE} barStyle='light-content'/>
+              <NavigationContainer>
+                  {mainNavigator()}
+              </NavigationContainer>
+          </View>
+      </Provider>
+
   )
 }
 

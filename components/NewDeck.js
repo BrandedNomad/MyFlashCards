@@ -1,12 +1,14 @@
 import React,{useState} from 'react'
 import {View,Text, StyleSheet,TextInput} from 'react-native'
+import {connect} from 'react-redux'
+
 import StyledButton from "./StyledButton";
 import {GRAY} from "../utils/colors";
+import {addDeck} from "../actions/decksAction";
 
 
+function NewDeck({route,navigation,dispatch}){
 
-function NewDeck({route,navigation}){
-    console.log(navigation)
 
     const [text,setText] = useState('');
 
@@ -27,6 +29,7 @@ function NewDeck({route,navigation}){
                     btnText={"Create Deck"}
                     btnType={"primary"}
                     onPress={()=>{
+                        dispatch(addDeck({title:text,cards:[]}))
                         navigation.navigate('Deck',{deck:{title:text,cards:[]}})
                     }}
                 />
@@ -52,4 +55,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default NewDeck
+export default connect()(NewDeck)
