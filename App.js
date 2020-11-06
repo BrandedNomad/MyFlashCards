@@ -10,6 +10,7 @@ import Home from './components/Home'
 import NewDeck from "./components/NewDeck";
 import {PRIMARY_BLUE, WHITE, GRAY, SECONDARY_PINK, DARK_BLUE} from "./utils/colors";
 
+
 function MyStatusBar({backgroundColor,...props}){
     return (
         <View
@@ -89,9 +90,7 @@ export default function App() {
               {mainNavigator()}
           </NavigationContainer>
       </View>
-
-
-  );
+  )
 }
 
 const styles = StyleSheet.create({
