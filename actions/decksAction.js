@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import {AsyncStorage} from "react-native";
 
 export const INITIALIZE = 'INITIALIZE';
 export const ADD_DECK = 'ADD_DECK';
@@ -79,14 +79,10 @@ async function getData(){
         const parsedResults = jsonResults.map((item)=>{
             return  JSON.parse(item[1])
         })
-        console.log("thisssss",jsonResults)
-        console.log("thatttttt",parsedResults)
 
         parsedResults.forEach((deck)=>{
             fetchedResults[deck.title] = deck
         })
-
-        console.log(fetchedResults)
 
         return fetchedResults
     }catch(error) {

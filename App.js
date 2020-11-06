@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, Platform, StatusBar} from 'react-native';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createStackNavigator} from "@react-navigation/stack";
@@ -15,7 +15,7 @@ import NewDeck from "./components/NewDeck";
 import Deck from './components/Deck';
 import logger from "./middleware/logger";
 import {PRIMARY_BLUE, WHITE, GRAY, SECONDARY_PINK, DARK_BLUE} from "./utils/colors";
-import {handleInitialData} from "./actions/decksAction";
+
 
 
 const store = createStore(decksReducer,applyMiddleware(thunk,logger));

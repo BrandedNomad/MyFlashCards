@@ -3,10 +3,8 @@ import {View,Text,FlatList, StyleSheet,ActivityIndicator} from 'react-native'
 import {connect} from 'react-redux'
 
 
-import {decks} from "../utils/_DATA";
 import DeckListItem from "./DeckListItem"
 import {handleInitialData} from "../actions/decksAction";
-import {AppLoading} from "expo";
 import {PRIMARY_PURPLE, SECONDARY_PINK} from "../utils/colors";
 
 
