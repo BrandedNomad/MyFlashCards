@@ -2,12 +2,18 @@ import React from 'react';
 import {View,Text,StyleSheet, TouchableOpacity} from 'react-native';
 import {DARK_BLUE, DARK_PINK, DARK_PURPLE, LIGHT_BLUE, LIGHT_PURPLE, PRIMARY_PURPLE, WHITE} from "../utils/colors";
 
-function DeckListItem({title,number}){
+function DeckListItem({deck,navigation}){
+
+    const title = deck.title;
+    const number = deck.cards.length + ""
 
 
     return (
         <TouchableOpacity
             style={styles.container}
+            onPress={()=>{
+                navigation.navigate('Deck',{deck})
+            }}
         >
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.body}>{number + (number > 1 ? " Cards" : " Card")}</Text>

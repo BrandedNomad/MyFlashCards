@@ -1,6 +1,6 @@
 export let decks = {
-    deck1:{
-        title:"Deck1",
+    math:{
+        title:"Math",
         cards:[
             {
                 question:"What is the circumference of the earth?",
@@ -8,8 +8,8 @@ export let decks = {
             }
         ]
     },
-    deck2:{
-        title:"Deck2",
+    geography:{
+        title:"History",
         cards:[
             {
                 question:"What is the circumference of the earth?",
@@ -25,8 +25,8 @@ export let decks = {
             }
         ]
     },
-    deck3:{
-        title:"Deck3",
+    science:{
+        title:"Science",
         cards:[
             {
                 question:"What is the circumference of the earth?",

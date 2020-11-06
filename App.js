@@ -8,6 +8,7 @@ import Constants from 'expo-constants'
 
 import Home from './components/Home'
 import NewDeck from "./components/NewDeck";
+import Deck from './components/Deck';
 import {PRIMARY_BLUE, WHITE, GRAY, SECONDARY_PINK, DARK_BLUE} from "./utils/colors";
 
 
@@ -77,7 +78,20 @@ const mainNavigator=()=>{
             }
           }}
       >
-        <Stack.Screen name='Home' component={tabNavigation}/>
+        <Stack.Screen
+            name='Home'
+            component={tabNavigation}
+        />
+        <Stack.Screen
+            name='Deck'
+            component={Deck}
+            options={({route})=>{
+                return {
+                    title:route.params.title,
+                    number:route.params.number
+                }
+            }}
+        />
       </Stack.Navigator>
   )
 }

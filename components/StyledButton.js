@@ -2,16 +2,16 @@ import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
 import {BLACK, DARK_BLUE, DARK_PINK, WHITE} from "../utils/colors";
 
-function StyledButton({btnType, btnText}){
+function StyledButton({btnType, btnText, onPress}){
     return(
         <View>
-            {btnType === 'primary' && <TouchableOpacity style={styles.primaryBtn}>
+            {btnType === 'primary' && <TouchableOpacity style={styles.primaryBtn} onPress={onPress}>
                 <Text style={styles.primaryText}>{btnText}</Text>
             </TouchableOpacity>}
-            {btnType === 'secondary' && <TouchableOpacity style={styles.secondaryBtn}>
+            {btnType === 'secondary' && <TouchableOpacity style={styles.secondaryBtn} onPress={onPress}>
                 <Text style={styles.secondaryText}>{btnText}</Text>
             </TouchableOpacity>}
-            {btnType === 'tertiary' && <TouchableOpacity style={styles.tertiaryBtn}>
+            {btnType === 'tertiary' && <TouchableOpacity style={styles.tertiaryBtn} onPress={onPress}>
                 <Text style={styles.tertiaryText}>{btnText}</Text>
             </TouchableOpacity>}
 

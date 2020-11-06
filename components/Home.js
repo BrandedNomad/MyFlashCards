@@ -5,7 +5,7 @@ import {decks} from "../utils/_DATA";
 import DeckListItem from "./DeckListItem"
 
 
-function Home(){
+function Home(props){
 
     if(Object.keys(decks).length === 0 || Object.keys(decks) === undefined){
         return (
@@ -31,10 +31,9 @@ function Home(){
                 data={decksList}
                 keyExtractor={(item, index) => 'key'+index}
                 renderItem={(item)=>{
-                    const title = item.item.title;
-                    const number = item.item.cards.length + ""
+                    const deck = item.item
                     return (
-                        <DeckListItem number={number} title={title}/>
+                        <DeckListItem deck={deck} navigation={props.navigation}/>
                     )
                 }}
 
