@@ -16,6 +16,7 @@ import Deck from './components/Deck';
 import logger from "./middleware/logger";
 import {PRIMARY_BLUE, WHITE, GRAY, SECONDARY_PINK, DARK_BLUE} from "./utils/colors";
 import AddCard from "./components/AddCard";
+import Quiz from "./components/Quiz";
 
 
 
@@ -120,6 +121,17 @@ const mainNavigator=()=>{
                   }
               }}
           />
+          <Stack.Screen
+              name='Quiz'
+              component={Quiz}
+              options={({route})=>{
+                  return {
+                      title:route.params.title,
+                      number:route.params.number
+                  }
+              }}
+          />
+
       </Stack.Navigator>
   )
 }

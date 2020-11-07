@@ -33,6 +33,9 @@ function Deck({route,dispatch,navigation,...props}){
                 <StyledButton
                     btnType={'primary'}
                     btnText={'Start Quiz'}
+                    onPress={()=>{
+                        navigation.navigate('Quiz', {title,number})
+                    }}
                 />
                 <StyledButton
                     btnType={'tertiary'}
