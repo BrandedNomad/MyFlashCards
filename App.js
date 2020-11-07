@@ -15,11 +15,11 @@ import NewDeck from "./components/NewDeck";
 import Deck from './components/Deck';
 import logger from "./middleware/logger";
 import {PRIMARY_BLUE, WHITE, GRAY, SECONDARY_PINK, DARK_BLUE} from "./utils/colors";
+import AddCard from "./components/AddCard";
 
 
 
 const store = createStore(decksReducer,applyMiddleware(thunk,logger));
-
 
 
 function MyStatusBar({backgroundColor,...props}){
@@ -50,7 +50,8 @@ function tabNavigation(){
             },
           })}
           navigationOptions={{
-            header:null
+            header:null,
+            initialRouteName:'Decks',
           }}
           tabBarOptions={{
             activeTintColor: Platform.OS === 'ios' ? PRIMARY_BLUE: WHITE,
@@ -87,6 +88,10 @@ const mainNavigator=()=>{
               backgroundColor:PRIMARY_BLUE,
             }
           }}
+          navigationOptions={{
+              initialRouteName:'Home'
+          }}
+
       >
         <Stack.Screen
             name='Home'
@@ -101,7 +106,20 @@ const mainNavigator=()=>{
                     number:route.params.number
                 }
             }}
+            navigationOptions = {{
+                backBehavior:'initialRoute'
+            }}
         />
+          <Stack.Screen
+              name='Add Card'
+              component={AddCard}
+              options={({route})=>{
+                  return {
+                      title:route.params.title,
+                      number:route.params.number
+                  }
+              }}
+          />
       </Stack.Navigator>
   )
 }

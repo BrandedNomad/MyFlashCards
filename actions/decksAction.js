@@ -3,7 +3,7 @@ import {AsyncStorage} from "react-native";
 export const INITIALIZE = 'INITIALIZE';
 export const ADD_DECK = 'ADD_DECK';
 export const REMOVE_DECK = 'REMOVE_DECK';
-export const ADD_QUESTION = 'ADD_QUESTION';
+export const ADD_CARD = 'ADD_CARD';
 export const STORAGE_KEY = 'MyFlashcards:decks'
 
 
@@ -97,4 +97,48 @@ export const handleInitialData = ()=>{
         })
     }
 
+}
+
+const addCard = (title,card)=>{
+    return {
+        type:ADD_CARD,
+        title:title,
+        card
+
+    }
+}
+
+async function addCardToStore(title,card){
+    try{
+
+        //get a list of existing cards and push it onto an array
+        const itemFromStore = await AsyncStorage.getItem(title)
+        const parsedItemFromStore = JSON.parse(itemFromStore)
+        const arrayOfCards = []
+        parsedItemFromStore.cards.forEach((item)=>{
+            arrayOfCards.push(item)
+        })
+
+        //create new object to save to store
+        const preppedItem = {
+            title,
+            cards:arrayOfCards.concat(card) //add new card to existing cards
+        }
+
+        //store items
+        const stringifiedItem = JSON.stringify(preppedItem)
+        await AsyncStorage.setItem(title,stringifiedItem)
+
+    }catch(error){
+        console.warn("Unable to add card to store", error)
+    }
+}
+
+export const handleAddCard=(title,card)=>{
+    return (dispatch)=>{
+        dispatch(addCard(title,card))
+        return addCardToStore(title,card).catch((error)=>{
+            console.warn(error)
+        })
+    }
 }

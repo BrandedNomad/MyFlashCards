@@ -6,10 +6,16 @@ import StyledButton from "./StyledButton";
 import {BLACK, GRAY} from "../utils/colors";
 import {handleRemoveDeck} from "../actions/decksAction";
 
-function Deck({route,dispatch,navigation}){
-    const deck = route.params.deck
+function Deck({route,dispatch,navigation,...props}){
+    const deck = route.params.deck;
     const title = deck.title;
-    const number = deck.cards.length + "";
+    let number = 0;
+
+    if(props.state[title] !== undefined){
+        number = props.state[title].cards.length + "";
+    }
+
+
     return(
         <View style={styles.container}>
             <View style={styles.main}>
@@ -17,12 +23,25 @@ function Deck({route,dispatch,navigation}){
                 <Text style={styles.subTitle}>{number + (number > 1? ' Cards': ' Card')}</Text>
             </View>
             <View style={styles.options}>
-                <StyledButton btnType={'secondary'} btnText={'Add Card'}/>
-                <StyledButton btnType={'primary'} btnText={'Start Quiz'}/>
-                <StyledButton btnType={'tertiary'} btnText={'Delete Deck'} onPress={()=>{
-                    dispatch(handleRemoveDeck(title))
-                    navigation.navigate('Home')
-                }}/>
+                <StyledButton
+                    btnType={'secondary'}
+                    btnText={'Add Card'}
+                    onPress={()=>{
+                        navigation.navigate('Add Card',{title:title,number:number})
+                    }}
+                />
+                <StyledButton
+                    btnType={'primary'}
+                    btnText={'Start Quiz'}
+                />
+                <StyledButton
+                    btnType={'tertiary'}
+                    btnText={'Delete Deck'}
+                    onPress={()=>{
+                        dispatch(handleRemoveDeck(title))
+                        navigation.navigate('Home')
+                    }}
+                />
             </View>
         </View>
     )
@@ -58,4 +77,13 @@ const styles = StyleSheet.create({
 
 })
 
-export default connect()(Deck);
+function mapStateToProps(state){
+
+
+
+    return{
+        state
+    }
+}
+
+export default connect(mapStateToProps)(Deck);

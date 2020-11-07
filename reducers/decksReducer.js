@@ -1,4 +1,4 @@
-import {INITIALIZE, ADD_DECK, REMOVE_DECK,ADD_QUESTION} from '../actions/decksAction'
+import {INITIALIZE, ADD_DECK, REMOVE_DECK,ADD_CARD} from '../actions/decksAction'
 
 
 function decksReducer(state={},action){
@@ -19,6 +19,17 @@ function decksReducer(state={},action){
 
             return {
                 ...state
+            }
+        case ADD_CARD:
+            return {
+                ...state,
+                [action.title]:{
+                    title:action.title,
+                    cards:[
+                        ...state[action.title].cards,
+                        action.card
+                    ]
+                }
             }
         default:
             return state
