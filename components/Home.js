@@ -1,34 +1,39 @@
+/**
+ * @overview Represents the Home view which contains a list of decks
+ */
 import React,{useEffect,useState} from 'react';
 import {View,Text,FlatList, StyleSheet,ActivityIndicator} from 'react-native'
 import {connect} from 'react-redux'
-import {setLocalNotification} from "../utils/notifications";
 
 
 import DeckListItem from "./DeckListItem"
 import {handleInitialData} from "../actions/decksAction";
-import * as Notifications from "expo-notifications";
-import * as Permissions from "expo-permissions";
-
 import {PRIMARY_PURPLE, SECONDARY_PINK} from "../utils/colors";
 
 
-
+/**
+ * @function
+ * @description Represents the Home view which contains a list of decks
+ * @param {Object} props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function Home(props){
 
-
+    //initializing variables
     const [ready,setReady] = useState(false)
 
+    //Hydrates the Redux store from local storage
     useEffect(()=>{
         setReady(false)
         props.dispatch(handleInitialData()).then(setReady(true))
-
     },[])
 
+    //initializing variables with state from the redux stores
     const decks = props.decks
     const cardsKeysList =  Object.keys(decks)
 
-    console.log(cardsKeysList)
-
+    //Returns a massage when user has no decks yet
     if(cardsKeysList.length === 0){
         return (
             <View style={styles.noDeck}>
@@ -37,6 +42,7 @@ function Home(props){
         )
     }
 
+    //Shows loading spinner while data is loading
     if(ready === false){
         return (
             <View style={styles.loading}>
@@ -45,15 +51,12 @@ function Home(props){
         )
     }
 
+    //creates an array of deck objects for the FlatList
     const decksKeys = Object.keys(props.decks)
     const decksList = []
     decksKeys.forEach((item)=>{
         decksList.push(props.decks[item])
     })
-
-
-
-
 
 
     return (
@@ -74,6 +77,7 @@ function Home(props){
     )
 }
 
+//Styles
 const styles = StyleSheet.create({
     container:{
         flex:1,
@@ -94,10 +98,17 @@ const styles = StyleSheet.create({
     }
 })
 
+/**
+ * @function
+ * @description Maps state from redux store to component's props
+ * @param {Object} state - state from redux store
+ * @returns {{decks: *}}
+ */
 function mapStateToProps(state){
     return{
         decks:state
     }
 }
 
+//exports component
 export default connect(mapStateToProps)(Home)
