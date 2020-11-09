@@ -1,7 +1,21 @@
+/**
+ * @overview this component is a reusable button component that can return either a primary, secondary or tertiary button, depending on its props
+ */
+
+//imports
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
-import {BLACK, DARK_BLUE, DARK_PINK, WHITE} from "../utils/colors";
+import {BLACK,DARK_PINK, WHITE} from "../utils/colors";
 
+/**
+ * @function
+ * @description Represents a reusable button component
+ * @param {String} btnType -specifies whether the button should be a primary, secondary or tertiary button
+ * @param {String} btnText - the text displayed on the button
+ * @param {function} onPress - the function that should be called when button is pressed
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function StyledButton({btnType, btnText, onPress}){
     return(
         <View>
@@ -14,12 +28,11 @@ function StyledButton({btnType, btnText, onPress}){
             {btnType === 'tertiary' && <TouchableOpacity style={styles.tertiaryBtn} onPress={onPress}>
                 <Text style={styles.tertiaryText}>{btnText}</Text>
             </TouchableOpacity>}
-
         </View>
-
     )
 }
 
+//styles
 const styles = StyleSheet.create({
     primaryBtn:{
         width:200,
@@ -64,4 +77,5 @@ const styles = StyleSheet.create({
     }
 })
 
+//exporting button
 export default StyledButton;
