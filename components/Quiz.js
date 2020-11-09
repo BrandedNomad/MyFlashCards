@@ -13,18 +13,22 @@ function Quiz({route,dispatch,navigation,...props}){
     let [cardIndex,setCardIndex] = useState(0)
     let [score, setScore] = useState(0)
     const [quizComplete,setQuizComplete] = useState(false)
+    let question;
+    let answer;
 
-    console.log("score: ", score)
 
     const {title,number} = route.params
-    const cards = props.state[title].cards
+    const cards = props.state[title].cards !== undefined ? props.state[title].cards : []
     const numberOfCards = cards.length
 
 
-    const question = cards[cardIndex].question
-    const answer = cards[cardIndex].answer
+    if(cards.length > 0){
+        question = cards[cardIndex].question
+        answer = cards[cardIndex].answer
+    }
 
-    if(number === 0 || number === '0'){
+
+    if(numberOfCards === 0){
         return (
             <View style={styles.container}>
                 <Text style={styles.noCardsFont}>Sorry, You dont' have any Flash Cards yet! Go back and add some cards</Text>

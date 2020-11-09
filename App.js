@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { StyleSheet, Text, View, Platform, StatusBar} from 'react-native';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createStackNavigator} from "@react-navigation/stack";
@@ -17,7 +17,7 @@ import logger from "./middleware/logger";
 import {PRIMARY_BLUE, WHITE, GRAY, SECONDARY_PINK, DARK_BLUE} from "./utils/colors";
 import AddCard from "./components/AddCard";
 import Quiz from "./components/Quiz";
-
+import {createTrigger,createNotification,setLocalNotification,isKeySet} from "./utils/notifications";
 
 
 const store = createStore(decksReducer,applyMiddleware(thunk,logger));
@@ -137,6 +137,19 @@ const mainNavigator=()=>{
 }
 
 export default function App() {
+
+    useEffect(()=>{
+        const hasKey = isKeySet()
+        if(!hasKey){
+            let DateNow = new Date(Date.now())
+            let message = createNotification("Study Reminder","Remember to study today")
+            let trigger = createTrigger(DateNow.getHours() + 3,5)
+            setLocalNotification(message,trigger).catch((error)=>{
+                console.log(error)
+            })
+        }
+
+    },[])
 
   return (
       <Provider store={store}>

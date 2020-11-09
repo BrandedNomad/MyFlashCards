@@ -1,20 +1,27 @@
 import React,{useEffect,useState} from 'react';
 import {View,Text,FlatList, StyleSheet,ActivityIndicator} from 'react-native'
 import {connect} from 'react-redux'
+import {setLocalNotification} from "../utils/notifications";
 
 
 import DeckListItem from "./DeckListItem"
 import {handleInitialData} from "../actions/decksAction";
+import * as Notifications from "expo-notifications";
+import * as Permissions from "expo-permissions";
+
 import {PRIMARY_PURPLE, SECONDARY_PINK} from "../utils/colors";
 
 
+
 function Home(props){
+
 
     const [ready,setReady] = useState(false)
 
     useEffect(()=>{
         setReady(false)
         props.dispatch(handleInitialData()).then(setReady(true))
+
     },[])
 
     const decks = props.decks

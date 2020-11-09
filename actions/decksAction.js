@@ -6,6 +6,8 @@ export const REMOVE_DECK = 'REMOVE_DECK';
 export const ADD_CARD = 'ADD_CARD';
 export const STORAGE_KEY = 'MyFlashcards:decks'
 
+import {NOTIFICATION_KEY} from "../utils/notifications";
+
 
 const removeDeck =(title)=>{
     return {
@@ -77,8 +79,13 @@ async function getData(){
         const keys = await AsyncStorage.getAllKeys();
         const jsonResults = await AsyncStorage.multiGet(keys)
         const parsedResults = jsonResults.map((item)=>{
-            return  JSON.parse(item[1])
+
+            return item[0] !== NOTIFICATION_KEY ? JSON.parse(item[1]) : null;
+        }).filter((item)=>{
+            return item !== null;
         })
+
+        console.log("This is it", parsedResults)
 
         parsedResults.forEach((deck)=>{
             fetchedResults[deck.title] = deck
