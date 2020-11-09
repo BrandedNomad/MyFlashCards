@@ -1,12 +1,23 @@
+/**
+ * @overview This file contains all the methods used to manage notifications in the app
+ */
+
+//imports
 import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
 import {AsyncStorage} from 'react-native'
 
+//Setting Constant
 export const NOTIFICATION_KEY = 'StudyCards:StudyNotification'
 
 
-
-
+/**
+ * @function
+ * @description creates a trigger date delayed by one day
+ * @param {number} hours - the time of day notification is triggered
+ * @param {number} minutes - the time of day notification is triggered
+ * @returns {Date}
+ */
 export function createTriggerTomorrow(hours, minutes){
     const notificationTrigger = new Date(Date.now());
     notificationTrigger.setDate(notificationTrigger.getDate() + 1)
@@ -17,6 +28,12 @@ export function createTriggerTomorrow(hours, minutes){
     return notificationTrigger
 }
 
+/**
+ * @description creates a trigger date for the same day
+ * @param {number} hours -the time of day notification is triggered
+ * @param {number} minutes -the time of day notification is triggered
+ * @returns {Date}
+ */
 export function createTrigger(hours, minutes){
     const notificationTrigger = new Date(Date.now());
     notificationTrigger.setHours(hours);
@@ -26,6 +43,10 @@ export function createTrigger(hours, minutes){
     return notificationTrigger
 }
 
+/**
+ * @description Cancels all scheduled notifications
+ * @returns {Promise<void>}
+ */
 export function clearLocalNotification(){
     return AsyncStorage.removeItem(NOTIFICATION_KEY)
         .then(Notifications.cancelAllScheduledNotificationsAsync).catch((error)=>{
@@ -33,6 +54,13 @@ export function clearLocalNotification(){
         })
 }
 
+/**
+ * @function
+ * @description Creates a notification message
+ * @param {String} title - title of the notification
+ * @param {String} message - the message body
+ * @returns {Object}
+ */
 export function createNotification(title, message){
     return {
         title:title,
@@ -50,14 +78,23 @@ export function createNotification(title, message){
 
 }
 
+/**
+ * @function
+ * @description Schedules notifications
+ * @param {Object} message -the message object returned by createNotifications
+ * @param {Object} trigger -the trigger object returned by createTrigger or createTriggerTomorrow
+ * @returns {Promise<void>}
+ */
 export async function setLocalNotification(message,trigger){
 
     try{
+        //Check if notification has already been scheduled
         AsyncStorage.getItem(NOTIFICATION_KEY)
             .then(JSON.parse)
             .then((data)=>{
                 if(data === null){
 
+                    //Get permission from device to schedule notifications
                     Permissions.askAsync(Permissions.NOTIFICATIONS)
                         .then(({status})=>{
                             console.log("Permission", status)
@@ -95,6 +132,12 @@ export async function setLocalNotification(message,trigger){
 }
 
 
+/**
+ * @function
+ * @description Checks if notification key has already been set or not
+ * @returns {Boolean} true when notification key is found
+ *
+ */
 export function isKeySet(){
     AsyncStorage.getItem(NOTIFICATION_KEY)
         .then(JSON.parse)

@@ -1,3 +1,7 @@
+/**
+ * @overview Dummy data used during development to test the app with
+ */
+
 export let decks = {
     math:{
         title:"Math",
