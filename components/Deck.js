@@ -1,3 +1,8 @@
+/**
+ * @overview Deck represents the individual deck view
+ */
+
+//imports
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {connect} from 'react-redux'
@@ -12,12 +17,24 @@ import {
     createTriggerTomorrow
 } from "../utils/notifications";
 
-
+/**
+ * @function
+ * @description Represents the individual deck view
+ * @param {Object} route - contains params passed in from previous view
+ * @param {function} dispatch - dispatches actions that update Redux and local storage
+ * @param {Object} navigation - contains navigate method
+ * @param {Object} props - props passed in to deck
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function Deck({route,dispatch,navigation,...props}){
+
+    //initializing variables
     const deck = route.params.deck;
     const title = deck.title;
     let number = 0;
 
+    //prevents app from crashing when the title has not
     if(props.state[title] !== undefined){
         number = props.state[title].cards.length + "";
     }
@@ -64,6 +81,7 @@ function Deck({route,dispatch,navigation,...props}){
     )
 }
 
+//Styles
 const styles = StyleSheet.create({
     container:{
         flex:1,
@@ -94,13 +112,18 @@ const styles = StyleSheet.create({
 
 })
 
+/**
+ * @function
+ * @description maps redux state to component props
+ * @param {Object} state - redux state from the store
+ * @returns {{state: *}}
+ */
 function mapStateToProps(state){
-
-
 
     return{
         state
     }
 }
 
+//exporting component
 export default connect(mapStateToProps)(Deck);
