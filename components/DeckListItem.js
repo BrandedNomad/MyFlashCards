@@ -1,9 +1,23 @@
+/**
+ * @overview Represents individual list item in the list of decks on the Home view.
+ */
+
+//import
 import React from 'react';
 import {View,Text,StyleSheet, TouchableOpacity} from 'react-native';
 import {DARK_BLUE, DARK_PINK, DARK_PURPLE, LIGHT_BLUE, LIGHT_PURPLE, PRIMARY_PURPLE, WHITE} from "../utils/colors";
 
+/**
+ * @function
+ * @description Represents individual list item in the list of decks on the Home view.
+ * @param {Object} deck - the individual deck
+ * @param {Object} navigation - contains the navigate method used to navigate
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function DeckListItem({deck,navigation}){
 
+    //initializing variables
     const title = deck.title;
     const number = deck.cards.length !== undefined ? deck.cards.length + "" : "0"
 
@@ -21,6 +35,7 @@ function DeckListItem({deck,navigation}){
     )
 }
 
+//styles
 const styles = StyleSheet.create({
     container:{
         flex:1,
@@ -51,4 +66,5 @@ const styles = StyleSheet.create({
     }
 })
 
+//exporting component
 export default DeckListItem;
