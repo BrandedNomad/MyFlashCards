@@ -8,7 +8,7 @@ import {connect} from 'react-redux'
 
 import DeckListItem from "./DeckListItem"
 import {handleInitialData} from "../actions/decksAction";
-import {PRIMARY_PURPLE, SECONDARY_PINK} from "../utils/colors";
+import {PRIMARY_PURPLE} from "../utils/colors";
 
 
 /**

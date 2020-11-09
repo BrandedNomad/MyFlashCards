@@ -1,3 +1,8 @@
+/**
+ * @overview Represents the Quiz View where user can check their understanding
+ */
+
+//imports
 import React,{ useState} from 'react';
 import {View,Text, StyleSheet,TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux'
@@ -7,27 +12,37 @@ import { Entypo } from '@expo/vector-icons';
 import {WHITE} from "../utils/colors";
 import StyledButton from "./StyledButton";
 
+/**
+ * @function
+ * @description Represents the quiz component
+ * @param {Object} route -passed in from navigator, contains params from previous view
+ * @param {function} dispatch - dispatches actions that are used to update Redux and local storage
+ * @param {Object} navigation - contains the navigate method used to navigate to other views
+ * @param {Object} props - contains all the props passed to component from Redux store and other components
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function Quiz({route,dispatch,navigation,...props}){
 
+    //initializing variables
     const [front, setFront] = useState(true)
     let [cardIndex,setCardIndex] = useState(0)
     let [score, setScore] = useState(0)
     const [quizComplete,setQuizComplete] = useState(false)
     let question;
     let answer;
+    const {title} = route.params;
+    const cards = props.state[title].cards !== undefined ? props.state[title].cards : [];
+    const numberOfCards = cards.length;
 
 
-    const {title,number} = route.params
-    const cards = props.state[title].cards !== undefined ? props.state[title].cards : []
-    const numberOfCards = cards.length
-
-
+    //checks if there are any cards in the deck, and extracts each card's question and answer
     if(cards.length > 0){
         question = cards[cardIndex].question
         answer = cards[cardIndex].answer
     }
 
-
+    //Presents user with a message to add cards if a deck has no cards in it
     if(numberOfCards === 0){
         return (
             <View style={styles.container}>
@@ -36,6 +51,7 @@ function Quiz({route,dispatch,navigation,...props}){
         )
     }
 
+    //Checks if quiz is complete, and presents the user with the user's score if it is.
     if(quizComplete){
 
         let percentage = Math.floor(score/numberOfCards * 100) + "%"
@@ -70,6 +86,7 @@ function Quiz({route,dispatch,navigation,...props}){
         )
     }
 
+    //renders either the front or the back of the card, depending on the state of the "front" flag
     return (
         <View style={styles.container}>
             {front &&
@@ -153,6 +170,7 @@ function Quiz({route,dispatch,navigation,...props}){
 
 }
 
+//styles
 const styles = StyleSheet.create({
     container:{
         flex:1,
@@ -216,10 +234,18 @@ const styles = StyleSheet.create({
     }
 })
 
+
+/**
+ * @function
+ * @description Maps state from the redux stores to the component's props
+ * @param {Object} state - state from redux store
+ * @returns {{state: *}}
+ */
 function mapStateToProps(state){
     return{
         state
     }
 }
 
+//exporting component
 export default connect(mapStateToProps)(Quiz)

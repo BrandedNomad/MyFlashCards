@@ -1,15 +1,27 @@
+/**
+ * @overview Represents the view for creating a new deck
+ */
+
+//imports
 import React,{useState} from 'react'
-import {View,Text, StyleSheet,TextInput} from 'react-native'
+import {View, StyleSheet,TextInput} from 'react-native'
 import {connect} from 'react-redux'
 
 import StyledButton from "./StyledButton";
 import {GRAY} from "../utils/colors";
 import {handleAddDeck} from "../actions/decksAction";
 
+/**
+ * @function
+ * @description Represents the view for creating a new deck
+ * @param {Object} navigation - contains navigate method for navigation
+ * @param {function} dispatch - for dispatching actions that update redux and local storage
+ * @returns {JSX.Element}
+ * @constructor
+ */
+function NewDeck({navigation,dispatch}){
 
-function NewDeck({route,navigation,dispatch}){
-
-
+    //initializing variables
     const [text,setText] = useState('');
 
     return (
@@ -40,6 +52,7 @@ function NewDeck({route,navigation,dispatch}){
     )
 }
 
+//Styles
 const styles = StyleSheet.create({
     container:{
         flex:1,
@@ -57,4 +70,5 @@ const styles = StyleSheet.create({
     }
 })
 
+//exporting component
 export default connect()(NewDeck)
