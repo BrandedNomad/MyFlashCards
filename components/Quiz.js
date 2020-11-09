@@ -31,7 +31,7 @@ function Quiz({route,dispatch,navigation,...props}){
     if(numberOfCards === 0){
         return (
             <View style={styles.container}>
-                <Text style={styles.noCardsFont}>Sorry, You dont' have any Flash Cards yet! Go back and add some cards</Text>
+                <Text style={styles.noCardsFont}>You haven't added any cards yet! Go back and add some cards</Text>
             </View>
         )
     }
@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         alignItems:'center',
+        justifyContent:'center'
 
     },
     innerContainer:{
@@ -182,7 +183,8 @@ const styles = StyleSheet.create({
         justifyContent:'center'
     },
     noCardsFont:{
-        fontSize:50
+        fontSize:30,
+        textAlign:'center',
     },
     resultBtn:{
         borderRadius:50,

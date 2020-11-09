@@ -19,10 +19,17 @@ import AddCard from "./components/AddCard";
 import Quiz from "./components/Quiz";
 import {createTrigger,createNotification,setLocalNotification,isKeySet} from "./utils/notifications";
 
-
+//Creating Redux store
 const store = createStore(decksReducer,applyMiddleware(thunk,logger));
 
 
+/**
+ * @function
+ * @description Represents the status bar at the top of the screen
+ * @param {Object} backgroundColor -The color of the status bar
+ * @param {Object} props
+ * @returns {JSX.Element}
+ */
 function MyStatusBar({backgroundColor,...props}){
     return (
         <View
@@ -35,6 +42,11 @@ function MyStatusBar({backgroundColor,...props}){
 
 }
 
+/**
+ * @function
+ * @description Represents the bottom Navigation Tabs on the Home screen
+ * @returns {JSX.Element}
+ */
 function tabNavigation(){
   const Tab = createBottomTabNavigator()
 
@@ -78,6 +90,11 @@ function tabNavigation(){
 
 }
 
+/**
+ * @function
+ * @description Represents the Main navigation for the application
+ * @returns {JSX.Element}
+ */
 const mainNavigator=()=>{
   const Stack = createStackNavigator()
 
@@ -136,10 +153,20 @@ const mainNavigator=()=>{
   )
 }
 
+/**
+ * @function
+ * @description Represents the App Component
+ * @returns {JSX.Element}
+ */
 export default function App() {
 
+    //Runs only once, when app loads
+    //Sets initial study reminder notification
     useEffect(()=>{
-        const hasKey = isKeySet()
+        const hasKey = isKeySet() //checks if notification has already been set
+
+        //Sets notification when no key is found
+        //todo: udpate initial notification to repeat
         if(!hasKey){
             let DateNow = new Date(Date.now())
             let message = createNotification("Study Reminder","Remember to study today")
@@ -150,6 +177,7 @@ export default function App() {
         }
 
     },[])
+
 
   return (
       <Provider store={store}>
@@ -164,6 +192,7 @@ export default function App() {
   )
 }
 
+//Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
