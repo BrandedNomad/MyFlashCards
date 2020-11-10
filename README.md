@@ -1,4 +1,4 @@
-# My Study Cards
+# My Flash Cards
 **My Flash Cards** is a mobile flash card application for Android devices. Now you can study anywhere, anytime.
 
 ## Getting started

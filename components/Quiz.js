@@ -11,6 +11,12 @@ import { Entypo } from '@expo/vector-icons';
 
 import {WHITE} from "../utils/colors";
 import StyledButton from "./StyledButton";
+import {
+    clearLocalNotification,
+    createNotification,
+    createTriggerTomorrow,
+    setLocalNotification
+} from "../utils/notifications";
 
 /**
  * @function
@@ -68,6 +74,12 @@ function Quiz({route,dispatch,navigation,...props}){
                         btnText={'Back'}
                         onPress={()=>{
                             navigation.goBack()
+                            clearLocalNotification().catch((error)=>{ console.log("unable to clear notification",error)})
+                            let message = createNotification("Study Reminder","Remember to Study!")
+                            let trigger = createTriggerTomorrow(16,0)
+                            setLocalNotification(message,trigger).catch((error)=>{
+                                console.log(error)
+                            })
                         }}
                     />
                     <StyledButton
@@ -78,6 +90,12 @@ function Quiz({route,dispatch,navigation,...props}){
                             setFront(true)
                             setQuizComplete(false)
                             setScore(0)
+                            clearLocalNotification().catch((error)=>{ console.log("unable to clear notification",error)})
+                            let message = createNotification("Study Reminder","Remember to Study!")
+                            let trigger = createTriggerTomorrow(16,0)
+                            setLocalNotification(message,trigger).catch((error)=>{
+                                console.log(error)
+                            })
                         }}
                     />
                 </View>

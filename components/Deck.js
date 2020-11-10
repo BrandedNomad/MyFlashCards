@@ -10,12 +10,7 @@ import {connect} from 'react-redux'
 import StyledButton from "./StyledButton";
 import {BLACK, GRAY} from "../utils/colors";
 import {handleRemoveDeck} from "../actions/decksAction";
-import {
-    setLocalNotification,
-    createNotification,
-    clearLocalNotification,
-    createTriggerTomorrow
-} from "../utils/notifications";
+
 
 /**
  * @function
@@ -59,12 +54,7 @@ function Deck({route,dispatch,navigation,...props}){
                     btnText={'Start Quiz'}
                     onPress={()=>{
                         navigation.navigate('Quiz', {title,number})
-                        clearLocalNotification()
-                        let message = createNotification("Study Reminder","Remember to Study!")
-                        let trigger = createTriggerTomorrow(16,0)
-                        setLocalNotification(message,trigger).catch((error)=>{
-                            console.log(error)
-                        })
+
 
                     }}
                 />
