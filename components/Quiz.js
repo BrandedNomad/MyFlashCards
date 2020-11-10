@@ -99,7 +99,6 @@ function Quiz({route,dispatch,navigation,...props}){
                         }}
                     />
                 </View>
-
             </View>
         )
     }

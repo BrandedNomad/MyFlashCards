@@ -13,20 +13,36 @@ import {BLACK,DARK_PINK, WHITE} from "../utils/colors";
  * @param {String} btnType -specifies whether the button should be a primary, secondary or tertiary button
  * @param {String} btnText - the text displayed on the button
  * @param {function} onPress - the function that should be called when button is pressed
+ * @param {Boolean| undefined } -whether the button should be disabled given a certain condition
  * @returns {JSX.Element}
  * @constructor
  */
-function StyledButton({btnType, btnText, onPress}){
+function StyledButton({btnType, btnText, onPress, disabled}){
+
+    disabled = disabled === undefined ? false : disabled;
+
     return(
         <View>
-            {btnType === 'primary' && <TouchableOpacity style={styles.primaryBtn} onPress={onPress}>
+            {btnType === 'primary' && <TouchableOpacity
+                style={[styles.primaryBtn,{backgroundColor: disabled ? '#c4c4c4': BLACK,borderColor:disabled ? '#c4c4c4':BLACK}]}
+                onPress={onPress}
+                disabled={disabled}
+            >
                 <Text style={styles.primaryText}>{btnText}</Text>
             </TouchableOpacity>}
-            {btnType === 'secondary' && <TouchableOpacity style={styles.secondaryBtn} onPress={onPress}>
+            {btnType === 'secondary' && <TouchableOpacity
+                style={[styles.secondaryBtn,{backgroundColor: disabled ? '#c4c4c4': WHITE,borderColor:disabled ? '#c4c4c4':BLACK}]}
+                onPress={onPress}
+                disabled={disabled}
+            >
                 <Text style={styles.secondaryText}>{btnText}</Text>
             </TouchableOpacity>}
-            {btnType === 'tertiary' && <TouchableOpacity style={styles.tertiaryBtn} onPress={onPress}>
-                <Text style={styles.tertiaryText}>{btnText}</Text>
+            {btnType === 'tertiary' && <TouchableOpacity
+                style={styles.tertiaryBtn}
+                onPress={onPress}
+                disabled={disabled}
+            >
+                <Text style={[styles.tertiaryText,{color:disabled?'#c4c4c4': DARK_PINK}]}>{btnText}</Text>
             </TouchableOpacity>}
         </View>
     )

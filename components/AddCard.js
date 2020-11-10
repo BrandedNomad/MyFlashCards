@@ -65,6 +65,7 @@ function AddCard({route,navigation,dispatch}){
                 <StyledButton
                     btnText={"Add Card"}
                     btnType={"primary"}
+                    disabled={answer.length < 2 || question.length < 2}
                     onPress={()=>{
                         handleSubmit(title,question,answer)
                         setQuestion('')

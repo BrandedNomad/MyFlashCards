@@ -52,6 +52,7 @@ function Deck({route,dispatch,navigation,...props}){
                 <StyledButton
                     btnType={'primary'}
                     btnText={'Start Quiz'}
+                    disabled={number<=0}
                     onPress={()=>{
                         navigation.navigate('Quiz', {title,number})
 

@@ -40,6 +40,7 @@ function NewDeck({navigation,dispatch}){
                 <StyledButton
                     btnText={"Create Deck"}
                     btnType={"primary"}
+                    disabled={text.length < 2 }
                     onPress={()=>{
                         const title = text
                         dispatch(handleAddDeck({title:title,cards:[]}))
