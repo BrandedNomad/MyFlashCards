@@ -1,6 +1,16 @@
 # My Flash Cards
 **My Flash Cards** is a mobile flash card application for Android devices. Now you can study anywhere, anytime. This application have been tested on Android 10 devices, but should work on newer platforms like Android 11.
 
+##Motivation
+
+This application is a part of my final project for the Udacity React Nanodegree Course.
+
+##Tech/Framework
+
+####Built with:
+
+This project was built with React Native
+
 ## Getting started
 
 ### Install
