@@ -5,7 +5,7 @@
     <key>EXUpdatesSDKVersion</key>
     <string>39.0.0</string>
     <key>EXUpdatesURL</key>
-    <string>https://exp.host/@brandednomad/my-flashcards</string>
+    <string>https://exp.host/@brandednomad/my-flash-cards</string>
     <key>EXUpdatesReleaseChannel</key>
     <string>default</string>
   </dict>

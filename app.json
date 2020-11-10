@@ -1,9 +1,9 @@
 {
-  "name": "Study Cards",
-  "displayName": "Study Cards",
+  "name": "My Flash Cards",
+  "displayName": "My Flash Cards",
   "expo": {
-    "name": "Study Cards",
-    "slug": "study-cards",
+    "name": "My Flash Cards",
+    "slug": "my-flash-cards",
     "description": "A flash card app that helps you study",
     "privacy": "public",
     "orientation": "portrait",
@@ -13,12 +13,12 @@
       "**/*"
     ],
     "android": {
-      "package": "com.brandednomad.studycardsapp",
+      "package": "com.brandednomad.myflashcardsapp",
       "versionCode": 1,
       "useNextNotificationsApi": true
     },
     "ios": {
-      "bundleIdentifier": "com.brandednomad.studycardsapp",
+      "bundleIdentifier": "com.brandednomad.myflashcardsapp",
       "buildNumber": "1.0.0"
     }
   }
