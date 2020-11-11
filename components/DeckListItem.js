@@ -5,7 +5,14 @@
 //import
 import React from 'react';
 import {View,Text,StyleSheet, TouchableOpacity} from 'react-native';
-import {DARK_BLUE, DARK_PINK, DARK_PURPLE, LIGHT_BLUE, LIGHT_PURPLE, PRIMARY_PURPLE, WHITE} from "../utils/colors";
+import {LinearGradient} from "expo-linear-gradient";
+
+import {
+    PRIMARY_BLUE_CONTRAST,
+    PRIMARY_PURPLE_CONTRAST,
+    PRIMARY_PINK_CONTRAST,
+    WHITE, PRIMARY_GRAY_CONTRAST
+} from "../utils/colors";
 
 /**
  * @function
@@ -29,8 +36,16 @@ function DeckListItem({deck,navigation}){
                 navigation.navigate('Deck',{deck})
             }}
         >
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.body}>{number + (number > 1 ? " Cards" : " Card")}</Text>
+            <LinearGradient
+                colors={[PRIMARY_PURPLE_CONTRAST,PRIMARY_BLUE_CONTRAST]}
+                style={styles.gradient}
+                start={{x:0.3,y:0.1}}
+
+
+            >
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.body}>{number + (number > 1 ? " Cards" : " Card")}</Text>
+            </LinearGradient>
         </TouchableOpacity>
     )
 }
@@ -40,22 +55,31 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         width:350,
-        padding:10,
         borderWidth:1,
         borderRadius:10,
-        borderColor:PRIMARY_PURPLE,
+        borderColor:PRIMARY_BLUE_CONTRAST,
         flexDirection:'column',
         justifyContent:"center",
         alignItems:"center",
         margin:5,
-        shadowRadius:3,
+        shadowRadius:10,
         shadowOpacity:0.8,
-        shadowColor:'rgba(0,0,0,0.24)',
+        shadowColor:PRIMARY_GRAY_CONTRAST,
         shadowOffset:{
-            width:0,
-            height:3
+            width:5,
+            height:10
         },
-        backgroundColor:PRIMARY_PURPLE,
+    },
+    gradient:{
+        flex:1,
+        width:350,
+        padding:10,
+        borderRadius:10,
+        borderColor:PRIMARY_BLUE_CONTRAST,
+        flexDirection:'column',
+        justifyContent:"center",
+        alignItems:"center",
+
     },
     title:{
         fontSize:20,

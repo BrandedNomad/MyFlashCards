@@ -1,24 +1,36 @@
 {
-  "name": "My Flash Cards",
-  "displayName": "My Flash Cards",
+  "name": "My Study Cards",
+  "displayName": "My Study Cards",
   "expo": {
-    "name": "My Flash Cards",
-    "slug": "my-flash-cards",
+    "name": "My Study Cards",
+    "slug": "my-study-cards",
     "description": "A flash card app that helps you study",
     "privacy": "public",
     "orientation": "portrait",
-    "icon": "https://img.icons8.com/doodle/96/000000/teaching.png",
+    "icon": "./assets/img/icon/icon.png",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ],
     "android": {
-      "package": "com.brandednomad.myflashcardsapp",
+      "package": "com.brandednomad.mystudycardsapp",
       "versionCode": 1,
-      "useNextNotificationsApi": true
+      "useNextNotificationsApi": true,
+      "splash": {
+        "mdpi": "./assets/img/splash/splash-screen.png",
+        "hdpi": "./assets/img/splash/splash-screen.png",
+        "xhdpi": "./assets/img/splash/splash-screen.png",
+        "xxhdpi": "./assets/img/splash/splash-screen.png",
+        "xxxhdpi": "./assets/img/splash/splash-screen.png",
+        "resizeMode": "contain"
+      }
     },
     "ios": {
-      "bundleIdentifier": "com.brandednomad.myflashcardsapp",
+      "bundleIdentifier": "com.brandednomad.mystudycardsapp",
+      "splash": {
+        "image": "./assets/img/splash/splash-screen.png",
+        "resizeMode": "contain"
+      },
       "buildNumber": "1.0.0"
     }
   }

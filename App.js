@@ -14,7 +14,16 @@ import Home from './components/Home'
 import NewDeck from "./components/NewDeck";
 import Deck from './components/Deck';
 import logger from "./middleware/logger";
-import {PRIMARY_BLUE, WHITE, GRAY, SECONDARY_PINK, DARK_BLUE} from "./utils/colors";
+import {
+    PRIMARY_BLUE,
+    WHITE,
+    GRAY,
+    SECONDARY_PINK,
+    DARK_BLUE,
+    PRIMARY_WHITE_CONTRAST,
+    PRIMARY_PURPLE_CONTRAST,
+    PRIMARY_BLUE_CONTRAST, PRIMARY_GRAY_CONTRAST
+} from "./utils/colors";
 import AddCard from "./components/AddCard";
 import Quiz from "./components/Quiz";
 import {createTrigger,createNotification,setLocalNotification,isKeySet} from "./utils/notifications";
@@ -67,11 +76,11 @@ function tabNavigation(){
             initialRouteName:'Decks',
           }}
           tabBarOptions={{
-            activeTintColor: Platform.OS === 'ios' ? PRIMARY_BLUE: WHITE,
-            inactiveTintColor: GRAY,
+            activeTintColor: Platform.OS === 'ios' ? PRIMARY_BLUE_CONTRAST: PRIMARY_WHITE_CONTRAST,
+            inactiveTintColor: PRIMARY_GRAY_CONTRAST,
             style:{
               height:56,
-              backgroundColor:Platform.OS === 'ios' ? WHITE:PRIMARY_BLUE,
+              backgroundColor:Platform.OS === 'ios' ? WHITE:PRIMARY_BLUE_CONTRAST,
               shadowColor: 'rgba(0,0,0,0.24)',
               shadowOffset:{
                 width:0,
@@ -101,18 +110,18 @@ const mainNavigator=()=>{
   return (
       <Stack.Navigator
           screenOptions={{
-            headerTintColor: WHITE,
+            headerTintColor: PRIMARY_WHITE_CONTRAST,
             headerStyle:{
-              backgroundColor:PRIMARY_BLUE,
+              backgroundColor:PRIMARY_BLUE_CONTRAST,
             }
           }}
           navigationOptions={{
-              initialRouteName:'Home'
+              initialRouteName:'My Study Cards'
           }}
 
       >
         <Stack.Screen
-            name='Home'
+            name='My Study Cards'
             component={tabNavigation}
         />
         <Stack.Screen
@@ -182,7 +191,7 @@ export default function App() {
   return (
       <Provider store={store}>
           <View style={{flex:1}}>
-              <MyStatusBar backgroundColor={DARK_BLUE} barStyle='light-content'/>
+              <MyStatusBar backgroundColor={PRIMARY_PURPLE_CONTRAST} barStyle='light-content'/>
               <NavigationContainer>
                   {mainNavigator()}
               </NavigationContainer>
@@ -196,7 +205,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: WHITE,
+    backgroundColor: PRIMARY_WHITE_CONTRAST,
     alignItems: 'center',
     justifyContent: 'center',
   },

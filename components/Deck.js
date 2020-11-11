@@ -64,7 +64,7 @@ function Deck({route,dispatch,navigation,...props}){
                     btnText={'Delete Deck'}
                     onPress={()=>{
                         dispatch(handleRemoveDeck(title))
-                        navigation.navigate('Home')
+                        navigation.navigate('My Study Cards')
                     }}
                 />
             </View>
